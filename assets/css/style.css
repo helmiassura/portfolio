@@ -32,39 +32,40 @@ h5,
 h6 {
   font-family: "Raleway", sans-serif;
 }
-
-/*--------------------------------------------------------------
-# Back to top button
---------------------------------------------------------------*/
-.back-to-top {
+.back-to-top,
+.whatsapp-float {
   position: fixed;
-  visibility: hidden;
-  opacity: 0;
   right: 15px;
-  bottom: 15px;
-  z-index: 996;
-  background: #149ddd;
   width: 40px;
   height: 40px;
-  border-radius: 50px;
-  transition: all 0.4s;
-}
-
-.back-to-top i {
-  font-size: 28px;
+  border-radius: 50%;
+  text-align: center;
   color: #fff;
-  line-height: 0;
+  z-index: 9999;
+  transition: all 0.4s ease;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-.back-to-top:hover {
-  background: #2eafec;
-  color: #fff;
+.back-to-top {
+  background: #007bff;
+  bottom: 15px;
 }
 
-.back-to-top.active {
-  visibility: visible;
+.whatsapp-float {
+  background: #25d366;
+  bottom: 65px; /* posisi default saat scroll turun */
+}
+
+/* Aktif */
+.back-to-top.active,
+.whatsapp-float.active {
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
+
 
 /*--------------------------------------------------------------
 # Header
@@ -1128,3 +1129,4 @@ section {
     padding-right: 20px 15px;
   }
 }
+

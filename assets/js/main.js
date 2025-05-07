@@ -5,7 +5,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -73,25 +73,40 @@
   }
 
   /**
-   * Back to top button
-   */
-  let backtotop = select('.back-to-top')
-  if (backtotop) {
-    const toggleBacktotop = () => {
-      if (window.scrollY > 100) {
-        backtotop.classList.add('active')
-      } else {
-        backtotop.classList.remove('active')
-      }
+ * Back to top button & WhatsApp button
+ */
+  const backtotop = document.querySelector('.back-to-top');
+  const whatsapp = document.querySelector('.whatsapp-float');
+
+  // Atur tombol berdasarkan scroll
+  function toggleButtons() {
+    if (window.scrollY > 100) {
+      backtotop.classList.add('active');
+      whatsapp.classList.add('active');
+      whatsapp.style.bottom = '65px'; // WhatsApp di atas tombol top
+    } else {
+      backtotop.classList.remove('active');
+      whatsapp.classList.add('active'); // WhatsApp tetap terlihat
+      whatsapp.style.bottom = '15px'; // WhatsApp ganti posisi ke bawah
     }
-    window.addEventListener('load', toggleBacktotop)
-    onscroll(document, toggleBacktotop)
   }
+
+  window.addEventListener('scroll', toggleButtons);
+  window.addEventListener('load', toggleButtons);
+
+  // Saat tombol back to top diklik
+  backtotop.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Turunkan WhatsApp ke posisi tombol top
+    whatsapp.style.bottom = '15px';
+  });
 
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('body').classList.toggle('mobile-nav-active')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -100,7 +115,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -150,7 +165,7 @@
     new Waypoint({
       element: skilsContent,
       offset: '80%',
-      handler: function(direction) {
+      handler: function (direction) {
         let progress = select('.progress .progress-bar', true);
         progress.forEach((el) => {
           el.style.width = el.getAttribute('aria-valuenow') + '%'
@@ -171,9 +186,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -181,7 +196,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
